@@ -30,33 +30,56 @@ public class PlanTrabajoDAO implements IPlanTrabajoDAO{
     public void insertar(PlanTrabajo planTrabajo) {
        ConexionBaseDeDatos conexionBaseDeDatos = new ConexionBaseDeDatos();
         try(Connection connection=conexionBaseDeDatos.getConectar()){
-         String pregunta ="INSERT INTO planTrabajo (id,nombre,nombreEncargado,fechaCreacion)"
-               +"values( ',' ,' ,' ,')"; 
-         PreparedStatement estado = connection.prepareStatement(pregunta);
-         estado.setInt(1,planTrabajo.getId());
-         estado.setString(2,planTrabajo.getNombre());
+         String orden ="INSERT INTO plantrabajo (idPlanTrabajo,tituloPlanTrabajo,nombreEncargado,meta,estrategia,numeroEstrategia,"
+                 + "resultado,fechaInicio,fechaFin) values(?, ?, ?, ?, ?, ?, ?, ?, ?)"; 
+         PreparedStatement estado = connection.prepareStatement(orden);
+         estado.setInt(1,planTrabajo.getIdPlanTrabajo());
+         estado.setString(2,planTrabajo.getTituloPlanTrabajo());
          estado.setString(3,planTrabajo.getNombreEncargado());
-         estado.setString(4,planTrabajo.getFechaCreacion());
-         estado.execute();
+         estado.setString(4,planTrabajo.getMeta());
+         estado.setString(5,planTrabajo.getEstrategia());
+         estado.setInt(6,planTrabajo.getNumeroEstrategia());
+         estado.setString(7,planTrabajo.getResultado());
+         estado.setString(8,planTrabajo.getFechaInicio());
+         estado.setString(9,planTrabajo.getFechaFin());
+         estado.executeUpdate();
         }  catch (SQLException ex) {
-            Logger.getLogger(MinutaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PlanTrabajoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }  
     }
 
     @Override
-    public void actualizar(PlanTrabajo plan_Trabajo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void actualizar(PlanTrabajo planTrabajo) {
+        ConexionBaseDeDatos conexionBaseDeDatos = new ConexionBaseDeDatos();
+        try(Connection connection=conexionBaseDeDatos.getConectar()){
+            String orden ="UPDATE plantrabajo SET tituloPlanTrabajo=?,nombreEncargado=?,meta=?,estrategia=?,numeroEstrategia=?,"
+                 + "resultado=?,fechaInicio=?,fechaFin=? WHERE idPlanTrabajo=?";
+            PreparedStatement estado = connection.prepareStatement(orden);
+            estado.setString(1,planTrabajo.getTituloPlanTrabajo());
+            estado.setString(2,planTrabajo.getNombreEncargado());
+            estado.setString(3,planTrabajo.getMeta());
+            estado.setString(4,planTrabajo.getEstrategia());
+            estado.setInt(5,planTrabajo.getNumeroEstrategia());
+            estado.setString(6,planTrabajo.getResultado());
+            estado.setString(7,planTrabajo.getFechaInicio());
+            estado.setString(8,planTrabajo.getFechaFin());
+            estado.setInt(9,planTrabajo.getIdPlanTrabajo());
+            estado.executeUpdate();
+        }catch(SQLException ex){
+            Logger.getLogger(PlanTrabajoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public void eliminar(int id) {
         ConexionBaseDeDatos conexionBaseDeDatos = new ConexionBaseDeDatos();
         try(Connection connection=conexionBaseDeDatos.getConectar()){
-            String pregunta = "DROP TABLE PlanTrabajo FROM";
-            PreparedStatement estado = connection.prepareStatement(pregunta);
+            String orden = "DELETE FROM plantrabajo WHERE idPlanTrabajo=?";
+            PreparedStatement estado = connection.prepareStatement(orden);
             estado.setInt(1,id);
+            estado.executeUpdate();
         }catch (SQLException ex){
-             Logger.getLogger(MinutaDAO.class.getName()).log(Level.SEVERE, null, ex);
+             Logger.getLogger(PlanTrabajoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

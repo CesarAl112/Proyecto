@@ -11,30 +11,30 @@ package Domain;
  * @author Alberto
  */
 public class Minuta {
-    private int id;
+    private int idMinuta;
     private String notas;
-    private String pendiente;
+    private String pendientes;
     private String nombreParticipante;
     private String nombreEncargado;
     private String nombreReunion;
     private String fechaCreacion;
     
     public Minuta(){
-        id = 0;
+        idMinuta = 0;
         notas = "";
-        pendiente = "";
+        pendientes = "";
         nombreParticipante = "";
         nombreEncargado = "";
         nombreReunion = "";
         fechaCreacion = "";
     }
     
-    public void setId(int id){
-        this.id = id;
+    public void setIdMinuta(int idMinuta){
+        this.idMinuta = idMinuta;
     }
     
-    public int getID(){
-        return id;
+    public int getIDMinuta(){
+        return idMinuta;
     }
     
     public void setTitulo(String notas){
@@ -73,12 +73,12 @@ public class Minuta {
         this.notas = notas;
     }
 
-    public String getPendiente() {
-        return pendiente;
+    public String getPendientes() {
+        return pendientes;
     }
 
-    public void setPendiente(String pendiente) {
-        this.pendiente = pendiente;
+    public void setPendientes(String pendientes) {
+        this.pendientes = pendientes;
     }
 
     public String getNombreParticipante() {

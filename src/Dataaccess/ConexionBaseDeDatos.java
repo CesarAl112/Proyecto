@@ -12,9 +12,9 @@ import java.util.logging.Level;
  */
 public class ConexionBaseDeDatos {
     private Connection conexion;
-    public String db = "jdbc:mysql://db4free.net/proyectofinalcu";
-    public String usuario = "axel28";
-    public String contrasena = "Panama123";
+    public String db = "jdbc:mysql://bnolc1ejdbfzv0rsa4ot-mysql.services.clever-cloud.com /bnolc1ejdbfzv0rsa4ot";
+    public String usuario = "uflm615hng2ad2cc";
+    public String contrasena = "T0iTnLPjUaObcOI4N4Av";
 
 
    public Connection getConectar() throws SQLException{

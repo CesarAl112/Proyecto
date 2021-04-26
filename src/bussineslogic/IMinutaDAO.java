@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface IMinutaDAO {
     public List<Minuta> obtenerMinuta();
-    public void actualizar(int id);
+    public void actualizar(Minuta minuta);
     public void insertar(Minuta minuta);
     public void eliminar(int id);
 

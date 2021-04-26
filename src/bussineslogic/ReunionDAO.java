@@ -26,39 +26,58 @@ public class ReunionDAO implements IReunionDAO{
     
     @Override
     public void insertar(Reunion reunion){
-         ConexionBaseDeDatos conexionBaseDeDatos = new ConexionBaseDeDatos();
+        ConexionBaseDeDatos conexionBaseDeDatos = new ConexionBaseDeDatos();
         try(Connection connection=conexionBaseDeDatos.getConectar()){
-         String pregunta ="INSERT INTO reunion (id,fechaFin,fechaInicio,tituloReunion"
-                 + "lider,lugarReunion,responsableRegistro)"
-               +"values( ',',',',',',',')"; 
-         PreparedStatement estado = connection.prepareStatement(pregunta);
+         String orden ="INSERT INTO reunion (idReunion,tituloReunion,responsableRegistro,"
+                 + "asunto,horaInicio,horaFin,lider,lugarReunion,fechaReunion) values(?, ?, ?, ?, ?, ?, ?, ?, ?)"; 
+         PreparedStatement estado = connection.prepareStatement(orden);
          estado.setInt(1,reunion.getId());
-         estado.setString(2,reunion.getFechaFin());
-         estado.setString(3,reunion.getFechaInicio());
-         estado.setString(4,reunion.getTituloReunion());
-         estado.setString(5,reunion.getLider());
-         estado.setString(6,reunion.getLugarReunion());
-         estado.setString(7,reunion.getResponsableRegistro());
-         estado.execute();
+         estado.setString(2,reunion.getTituloReunion());
+         estado.setString(3,reunion.getResponsableRegistro());
+         estado.setString(4,reunion.getAsunto());
+         estado.setString(5,reunion.getHoraInicio());
+         estado.setString(6,reunion.getHoraFin());
+         estado.setString(7,reunion.getLider());
+         estado.setString(8,reunion.getLugarReunion());
+         estado.setString(9,reunion.getFechaReunion());
+         estado.executeUpdate();
         }  catch (SQLException ex) {
-            Logger.getLogger(MinutaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ReunionDAO.class.getName()).log(Level.SEVERE, null, ex);
         }  
     }
 
     @Override
     public void actualizar(Reunion reunion) {
-        
+        ConexionBaseDeDatos conexionBaseDeDatos = new ConexionBaseDeDatos();
+        try(Connection connection=conexionBaseDeDatos.getConectar()){
+         String orden ="UPDATE reunion SET tituloReunion=?,responsableRegistro=?,asunto = ?,horaInicio=?,"
+                 + "horaFin=?,lider=?,lugarReunion=?,fechaReunion=? WHERE idReunion=?";
+         PreparedStatement estado = connection.prepareStatement(orden);
+         estado.setString(1,reunion.getTituloReunion());
+         estado.setString(2,reunion.getResponsableRegistro());
+         estado.setString(3,reunion.getAsunto());
+         estado.setString(4,reunion.getHoraInicio());
+         estado.setString(5,reunion.getHoraFin());
+         estado.setString(6,reunion.getLider());
+         estado.setString(7,reunion.getLugarReunion());
+         estado.setString(8,reunion.getFechaReunion());
+         estado.setInt(9,reunion.getId());
+         estado.executeUpdate();
+        }catch(SQLException ex){
+            Logger.getLogger(ReunionDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public void eliminar(int id) {
         ConexionBaseDeDatos conexionBaseDeDatos = new ConexionBaseDeDatos();
         try(Connection connection=conexionBaseDeDatos.getConectar()){
-            String pregunta = "DROP TABLE reunion FROM";
+            String pregunta = "DELETE FROM reunion WHERE idReunion=?";
             PreparedStatement estado = connection.prepareStatement(pregunta);
             estado.setInt(1,id);
+            estado.executeUpdate();
         }catch (SQLException ex){
-             Logger.getLogger(MinutaDAO.class.getName()).log(Level.SEVERE, null, ex);
+             Logger.getLogger(ReunionDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
        

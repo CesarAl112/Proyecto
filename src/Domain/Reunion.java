@@ -13,11 +13,11 @@ package Domain;
 public class Reunion {
     private int id;
     private String tituloReunion;
-    private String fechaInicio;
-    private String fechaFin;
+    private String horaInicio;
+    private String horaFin;
+    private String lider;
     private String responsableRegistro;
     private String asunto;
-    private String lider;
     private String lugarReunion;
     private String fechaReunion;
     
@@ -25,8 +25,13 @@ public class Reunion {
     public Reunion(){
         id=0;
         tituloReunion="";
-        fechaInicio="";
-        fechaFin="";
+        horaInicio="";
+        horaFin="";
+        lider="";
+        responsableRegistro="";
+        asunto="";
+        lugarReunion="";
+        fechaReunion="";
     }
     
     public void setId(int id){
@@ -37,20 +42,28 @@ public class Reunion {
         return id;
     }
     
-    public void setFechaInicio(String fechaInicio){
-        this.fechaInicio = fechaInicio;
+    public String getHoraInicio() {
+        return horaInicio;
+    }
+
+    public void setHoraInicio(String horaInicio) {
+        this.horaInicio = horaInicio;
+    }
+
+    public String getHoraFin() {
+        return horaFin;
     }
     
-    public String getFechaInicio(){
-        return fechaInicio;
+     public String getLider() {
+        return lider;
     }
-    
-    public void setFechaFin(String fechaFin){
-        this.fechaFin = fechaFin;
+
+    public void setLider(String lider) {
+        this.lider = lider;
     }
-    
-    public String getFechaFin(){
-        return fechaFin;
+
+    public void setHoraFin(String horaFin) {
+        this.horaFin = horaFin;
     }
 
     public String getTituloReunion() {
@@ -77,14 +90,6 @@ public class Reunion {
         this.asunto = asunto;
     }
 
-    public String getLider() {
-        return lider;
-    }
-
-    public void setLider(String lider) {
-        this.lider = lider;
-    }
-
     public String getLugarReunion() {
         return lugarReunion;
     }
@@ -100,4 +105,5 @@ public class Reunion {
     public void setFechaReunion(String fechaReunion) {
         this.fechaReunion = fechaReunion;
     }
+
 }

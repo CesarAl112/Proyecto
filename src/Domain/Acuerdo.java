@@ -5,10 +5,27 @@ package Domain;
  */
 public class Acuerdo {
     private int idAcuerdo;
-    private String ResponsableAcuerdo;
-    private String TituloAcuerdo;
-    private String NumeroAcuerdo;
-    private String CumplimientoAcuerdo;
+    private String responsableAcuerdo;
+    private String tituloAcuerdo;
+    private int numeroAcuerdo;
+    private String cumplimientoAcuerdo;
+    
+    
+    public Acuerdo(){
+        idAcuerdo = 0;
+        responsableAcuerdo = "";
+        tituloAcuerdo = "";
+        numeroAcuerdo = 0;
+        cumplimientoAcuerdo = "";
+    }
+    
+    public Acuerdo(int idAcuerdo,String responsableAcuerdo,String tituloAcuerdo, int numeroAcuerdo,String cumplimientoAcuerdo){
+        this.idAcuerdo=idAcuerdo;
+        this.responsableAcuerdo=responsableAcuerdo;
+        this.tituloAcuerdo=tituloAcuerdo;
+        this.numeroAcuerdo=numeroAcuerdo;
+        this.cumplimientoAcuerdo=cumplimientoAcuerdo;
+    }
 
     public int getIdAcuerdo() {
         return idAcuerdo;
@@ -19,34 +36,34 @@ public class Acuerdo {
     }
 
     public String getResponsableAcuerdo() {
-        return ResponsableAcuerdo;
+        return responsableAcuerdo;
     }
 
-    public void setResponsableAcuerdo(String ResponsableAcuerdo) {
-        this.ResponsableAcuerdo = ResponsableAcuerdo;
+    public void setResponsableAcuerdo(String responsableAcuerdo) {
+        this.responsableAcuerdo = responsableAcuerdo;
     }
 
     public String getTituloAcuerdo() {
-        return TituloAcuerdo;
+        return tituloAcuerdo;
     }
 
-    public void setTituloAcuerdo(String TituloAcuerdo) {
-        this.TituloAcuerdo = TituloAcuerdo;
+    public void setTituloAcuerdo(String tituloAcuerdo) {
+        this.tituloAcuerdo = tituloAcuerdo;
     }
 
-    public String getNumeroAcuerdo() {
-        return NumeroAcuerdo;
+    public int getNumeroAcuerdo() {
+        return numeroAcuerdo;
     }
 
-    public void setNumeroAcuerdo(String NumeroAcuerdo) {
-        this.NumeroAcuerdo = NumeroAcuerdo;
+    public void setNumeroAcuerdo(int numeroAcuerdo) {
+        this.numeroAcuerdo = numeroAcuerdo;
     }
 
     public String getCumplimientoAcuerdo() {
-        return CumplimientoAcuerdo;
+        return cumplimientoAcuerdo;
     }
 
-    public void setCumplimientoAcuerdo(String CumplimientoAcuerdo) {
-        this.CumplimientoAcuerdo = CumplimientoAcuerdo;
+    public void setCumplimientoAcuerdo(String cumplimientoAcuerdo) {
+        this.cumplimientoAcuerdo = cumplimientoAcuerdo;
     }
 }

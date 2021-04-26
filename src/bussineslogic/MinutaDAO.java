@@ -28,23 +28,40 @@ public class MinutaDAO implements IMinutaDAO{
     }
     
     @Override
-    public void actualizar(int id) {
-      
-}
+    public void actualizar(Minuta minuta) {
+         ConexionBaseDeDatos conexionBaseDeDatos = new ConexionBaseDeDatos();
+         try(Connection connection=conexionBaseDeDatos.getConectar()){
+             String orden = "UPDATE minuta SET nombreParticipante=?,nombreEncargado=?, nombreReunion=?,"
+                     + "pendientes=?,notas=?,fechaCreacion=? WHERE idMinuta=?";
+             PreparedStatement estado = connection.prepareStatement(orden);
+             estado.setInt(7, minuta.getIDMinuta());
+             estado.setString(1,minuta.getNombreParticipante());
+             estado.setString(2,minuta.getNombreEncargado());
+             estado.setString(3,minuta.getNombreReunion());
+             estado.setString(4,minuta.getPendientes());
+             estado.setString(5,minuta.getNotas());
+             estado.setString(6,minuta.getFechaCreacion());
+             estado.executeUpdate();
+         }catch(SQLException ex){
+             Logger.getLogger(MinutaDAO.class.getName()).log(Level.SEVERE, null, ex);
+         }
+    }
 
     @Override
     public void insertar(Minuta minuta){
         ConexionBaseDeDatos conexionBaseDeDatos = new ConexionBaseDeDatos();
         try(Connection connection=conexionBaseDeDatos.getConectar()){
-         String pregunta ="INSERT INTO MINUTA (id,NombreParticipante,Pendiente,Notas,Fecha_creacion)"
-               +"values( ',' ,' ,' ,')"; 
-         PreparedStatement estado = connection.prepareStatement(pregunta);
-         estado.setInt(1,minuta.getID());
+         String orden ="INSERT INTO minuta (idMinuta,nombreParticipante,nombreEncargado,nombreReunion,"
+                 + "pendientes,notas,fechaCreacion)values( ?, ?, ?, ?, ?, ?, ?)"; 
+         PreparedStatement estado = connection.prepareStatement(orden);
+         estado.setInt(1,minuta.getIDMinuta());
          estado.setString(2,minuta.getNombreParticipante());
-         estado.setString(3,minuta.getPendiente());
-         estado.setString(4,minuta.getNotas());
-         estado.setString(5,minuta.getFechaCreacion());
-         estado.execute();
+         estado.setString(3,minuta.getNombreEncargado());
+         estado.setString(4,minuta.getNombreReunion());
+         estado.setString(5,minuta.getPendientes());
+         estado.setString(6,minuta.getNotas());
+         estado.setString(7,minuta.getFechaCreacion());
+         estado.executeUpdate();
         }  catch (SQLException ex) {
             Logger.getLogger(MinutaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }  
@@ -54,9 +71,10 @@ public class MinutaDAO implements IMinutaDAO{
     public void eliminar(int id){
         ConexionBaseDeDatos conexionBaseDeDatos = new ConexionBaseDeDatos();
         try(Connection connection=conexionBaseDeDatos.getConectar()){
-            String pregunta = "DROP TABLE Minuta FROM";
-            PreparedStatement estado = connection.prepareStatement(pregunta);
+            String orden = "DELETE FROM minuta WHERE idMinuta=?";
+            PreparedStatement estado = connection.prepareStatement(orden);
             estado.setInt(1,id);
+            estado.executeUpdate();
         }catch (SQLException ex){
              Logger.getLogger(MinutaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

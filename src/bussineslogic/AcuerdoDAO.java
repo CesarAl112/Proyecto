@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package bussineslogic;
 
 import Dataaccess.ConexionBaseDeDatos;
@@ -27,35 +22,49 @@ public class AcuerdoDAO implements IAcuerdoDAO{
 
     @Override
     public void insertar(Acuerdo acuerdo) {
-         ConexionBaseDeDatos conexionBaseDeDatos = new ConexionBaseDeDatos();
+        ConexionBaseDeDatos conexionBaseDeDatos = new ConexionBaseDeDatos();
         try(Connection connection=conexionBaseDeDatos.getConectar()){
-         String pregunta ="INSERT INTO acuerdo (id,CumplimientoAcuerdo,numeroAcuerdo,responsableAcuerdo,tituloAcuerdo)"
-               +"values( ',' ,' ,' ,')"; 
-         PreparedStatement estado = connection.prepareStatement(pregunta);
-         estado.setInt(1,acuerdo.getIdAcuerdo());
-         estado.setString(2,acuerdo.getCumplimientoAcuerdo());
-         estado.setString(3,acuerdo.getNumeroAcuerdo());
-         estado.setString(4,acuerdo.getResponsableAcuerdo());
-         estado.setString(5,acuerdo.getTituloAcuerdo());
-         estado.execute();
+         String orden ="INSERT INTO acuerdo (tituloAcuerdo,responsableAcuerdo,numeroAcuerdo,cumplimientoAcuerdo,idAcuerdo) values( ?, ?, ?, ?, ?)";
+         PreparedStatement estado = connection.prepareStatement(orden);
+         estado.setString(1,acuerdo.getTituloAcuerdo());
+         estado.setString(2,acuerdo.getResponsableAcuerdo());
+         estado.setInt(3,acuerdo.getNumeroAcuerdo());
+         estado.setString(4,acuerdo.getCumplimientoAcuerdo());
+         estado.setInt(5,acuerdo.getIdAcuerdo());
+         estado.executeUpdate();
         }  catch (SQLException ex) {
-            Logger.getLogger(MinutaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AcuerdoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }  
     }
 
     @Override
     public void actualizar(Acuerdo acuerdo) {
-        
+        ConexionBaseDeDatos conexionBaseDeDatos = new ConexionBaseDeDatos();
+        try(Connection connection=conexionBaseDeDatos.getConectar()){
+            String orden = "UPDATE acuerdo SET tituloAcuerdo=?,responsableAcuerdo=?,numeroAcuerdo=?,cumplimientoAcuerdo=?"
+                    + " WHERE idAcuerdo=?";
+            PreparedStatement estado = connection.prepareStatement(orden);
+            estado.setInt(5,acuerdo.getIdAcuerdo());
+            estado.setString(4,acuerdo.getCumplimientoAcuerdo());
+            estado.setInt(3,acuerdo.getNumeroAcuerdo());
+            estado.setString(2,acuerdo.getResponsableAcuerdo());
+            estado.setString(1,acuerdo.getTituloAcuerdo());
+            estado.executeUpdate();
+        }catch(SQLException ex){
+            Logger.getLogger(AcuerdoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
-    public void eliminar(int id) {
+    public void eliminar(int idAcuerdo) {
        ConexionBaseDeDatos conexionBaseDeDatos = new ConexionBaseDeDatos();
         try(Connection connection=conexionBaseDeDatos.getConectar()){
-            PreparedStatement estado = connection.prepareStatement(pregunta);
-            estado.setInt(1,id);
+            String orden ="DELETE FROM acuerdo WHERE idAcuerdo=?";        
+            PreparedStatement estado = connection.prepareStatement(orden);
+            estado.setInt(idAcuerdo, idAcuerdo);
+            estado.executeUpdate();
         }catch (SQLException ex){
-             Logger.getLogger(MinutaDAO.class.getName()).log(Level.SEVERE, null, ex);
+             Logger.getLogger(AcuerdoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
