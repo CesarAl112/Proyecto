@@ -3,7 +3,8 @@ package testdataacess;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import Dataaccess.ConexionBaseDeDatos;
+import SGP_CA.Dataaccess.ConexionBaseDeDatos;
+
 import org.junit.Test;
 import org.junit.Assert;
 /**
@@ -15,7 +16,6 @@ public class PruebaConexionBaseDeDatos {
     public void PruebaConexionBaseDeDatos() throws SQLException{
         Connection conexionActual=new ConexionBaseDeDatos().getConectar();
         Assert.assertNotNull(conexionActual);
-    }
-    
+    }   
    
 }
